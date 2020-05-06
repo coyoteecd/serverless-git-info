@@ -41,6 +41,20 @@ describe('ServerlessGitInfo', () => {
       expect(plugin.execAsync).toHaveBeenCalledWith('git rev-parse --short HEAD');
     });
 
+    it('should resolve git:user.name', async () => {
+      plugin.execAsync = jasmine.createSpy('execAsync').and.resolveTo({ stdout: 'jon' });
+
+      await expectAsync(gitResolver('git:user.name')).toBeResolvedTo('jon');
+      expect(plugin.execAsync).toHaveBeenCalledWith('git config user.name');
+    });
+
+    it('should resolve git:user.email', async () => {
+      plugin.execAsync = jasmine.createSpy('execAsync').and.resolveTo({ stdout: 'jon.snow@got.com' });
+
+      await expectAsync(gitResolver('git:user.email')).toBeResolvedTo('jon.snow@got.com');
+      expect(plugin.execAsync).toHaveBeenCalledWith('git config user.email');
+    });
+
     it('should reject unknown variables', async () => {
       plugin.execAsync = jasmine.createSpy('execAsync');
 

@@ -27,6 +27,8 @@ custom:
   gitBranch: ${git:branch}   # git rev-parse --abbrev-ref HEAD
   gitCommit: ${git:commit}   # git rev-parse HEAD
   gitSha1: ${git:sha1}       # git rev-parse --short HEAD
+  gitUser: ${git:user.name}  # git config user.name
+  gitEmail: ${git:user.email}  # git config user.email
 
   # You can also combine them as any other Serverless variable
   gitInfo: ${git:branch}@${git:sha1}

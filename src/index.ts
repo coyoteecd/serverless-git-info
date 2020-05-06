@@ -24,6 +24,10 @@ export default class ServerlessGitInfo implements Plugin {
         return this.execGitCommand('rev-parse HEAD');
       case 'git:sha1':
         return this.execGitCommand('rev-parse --short HEAD');
+      case 'git:user.name':
+        return this.execGitCommand('config user.name');
+      case 'git:user.email':
+        return this.execGitCommand('config user.email');
       default:
         throw new Error(`${variableSource} is not supported by serverless-git-info plugin`);
     }
