@@ -20,6 +20,16 @@ Add the following to your `serverless.yml`:
 ```yml
 plugins:
   - serverless-git-info
+
+custom:
+  # Each of these variables resolves to the response of the git command in the comment,
+  # as executed in the directory where you're deploying from
+  gitBranch: ${git:branch}   # git rev-parse --abbrev-ref HEAD
+  gitCommit: ${git:commit}   # git rev-parse HEAD
+  gitSha1: ${git:sha1}       # git rev-parse --short HEAD
+
+  # You can also combine them as any other Serverless variable
+  gitInfo: ${git:branch}@${git:sha1}
 ```
 
 This plugin does not have any configuration options (yet).
