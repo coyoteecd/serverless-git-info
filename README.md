@@ -6,6 +6,7 @@
 [![npm version][icon-npm]][link-npm]
 
 Exposes git information extracted from the current local repository as Serverless variables.
+Similar to [serverless-plugin-git-variables](https://github.com/jacob-meacham/serverless-plugin-git-variables), but without exporting as environment variables and without a dependency on babel-runtime.
 
 ## Installation
 
@@ -32,6 +33,26 @@ custom:
 
   # You can also combine them as any other Serverless variable
   gitInfo: ${git:branch}@${git:sha1}
+```
+
+When you need to expose git info to your Lambda functions:
+
+```yml
+plugins:
+  - serverless-git-info
+
+provider:
+  name: aws
+  environment:
+    # This will be available to all lambdas
+    GIT_COMMIT: ${git:commit}
+
+functions:
+  test:
+    environment:
+      # This will only be available in the 'test' lambda
+      GIT_BRANCH: ${git:branch}
+
 ```
 
 This plugin does not have any configuration options (yet).
