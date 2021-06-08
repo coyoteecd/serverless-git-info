@@ -31,19 +31,19 @@
   },
   "homepage": "https://github.com/coyoteecd/serverless-git-info#readme",
   "devDependencies": {
-    "@types/jasmine": "^3.5.14",
-    "@types/node": "^12.12.67",
-    "@types/serverless": "^1.78.1",
-    "@typescript-eslint/eslint-plugin": "^4.4.0",
-    "@typescript-eslint/parser": "^4.4.0",
-    "eslint": "^7.11.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.1",
-    "jasmine": "^3.6.1",
+    "@types/jasmine": "^3.7.7",
+    "@types/node": "^12.20.15",
+    "@types/serverless": "^1.78.28",
+    "@typescript-eslint/eslint-plugin": "^4.26.1",
+    "@typescript-eslint/parser": "^4.26.1",
+    "eslint": "^7.28.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "jasmine": "^3.7.0",
     "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
-    "serverless": "^2.6.0",
-    "typescript": "^4.0.3"
+    "serverless": "^2.45.1",
+    "typescript": "^4.3.2"
   },
   "peerDependencies": {
     "serverless": "^1.60.0 || ^2.0.0"

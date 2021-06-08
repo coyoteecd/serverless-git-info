@@ -1,7 +1,7 @@
-import Serverless = require('serverless');
-import Plugin = require('serverless/classes/Plugin');
-import childProcess = require('child_process');
-import util = require('util');
+import Serverless from 'serverless';
+import Plugin from 'serverless/classes/Plugin';
+import childProcess from 'child_process';
+import util from 'util';
 
 export default class ServerlessGitInfo implements Plugin {
   public hooks: Plugin.Hooks;
