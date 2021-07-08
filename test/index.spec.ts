@@ -7,17 +7,19 @@ describe('ServerlessGitInfo', () => {
   it('should create the plugin', () => {
     const plugin = new ServerlessGitInfo({} as Serverless);
     expect(plugin).toBeTruthy();
-    expect(plugin.variableResolvers).toBeDefined('no resolvers defined');
-    expect(plugin.variableResolvers.git).toBeDefined('no resolver for git variable prefix');
+    expect(plugin.variableResolvers).withContext('no resolvers defined').toBeDefined();
+    expect(plugin.variableResolvers.git).withContext('no resolver for git variable prefix').toBeDefined();
   });
 
   describe('when resolving variables', () => {
     let plugin: ServerlessGitInfo;
     let gitResolver: VariableResolver;
+    let newGitResolver: { resolve: ({ address: string }) => Promise<{ value: string }>; };
 
     beforeEach(() => {
       plugin = new ServerlessGitInfo({} as Serverless);
       gitResolver = plugin.variableResolvers.git as VariableResolver;
+      newGitResolver = plugin.configurationVariablesSources.git;
     });
 
     it('should resolve git:branch', async () => {
@@ -60,6 +62,13 @@ describe('ServerlessGitInfo', () => {
 
       await expectAsync(gitResolver('git:bad')).toBeRejectedWithError(/git:bad is not supported/);
       expect(plugin.execAsync).not.toHaveBeenCalled();
+    });
+
+    it('should resolve git:branch using the new variable resolver', async () => {
+      plugin.execAsync = jasmine.createSpy('execAsync').and.resolveTo({ stdout: 'branchy' });
+
+      await expectAsync(newGitResolver.resolve({ address: 'branch' })).toBeResolvedTo({ value: 'branchy' });
+      expect(plugin.execAsync).toHaveBeenCalledWith('git rev-parse --abbrev-ref HEAD');
     });
   });
 });

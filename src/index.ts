@@ -6,11 +6,23 @@ import util from 'util';
 export default class ServerlessGitInfo implements Plugin {
   public hooks: Plugin.Hooks;
   public variableResolvers: Plugin.VariableResolvers;
+  public configurationVariablesSources: { git: { resolve: ({ address: string }) => Promise<{ value: string }>; }; };
   public execAsync = util.promisify(childProcess.exec);
 
   constructor(_serverless: Serverless) {
     this.hooks = {
     };
+
+    this.configurationVariablesSources = {
+      git: {
+        resolve: async ({ address }) => {
+          const value = await this.gitResolver(`git:${address}`);
+          return { value };
+        }
+      }
+    };
+
+    // backward compatibility for Serverless Framework v1 or v2.x using old-style variable resolution mode
     this.variableResolvers = {
       git: (source) => this.gitResolver(source)
     };
