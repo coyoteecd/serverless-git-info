@@ -1,6 +1,6 @@
 {
   "name": "serverless-git-info",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Serverless plugin for that exposes git info as serverless variables",
   "main": "dist/index.js",
   "scripts": {
