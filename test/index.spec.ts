@@ -14,7 +14,7 @@ describe('ServerlessGitInfo', () => {
   describe('when resolving variables', () => {
     let plugin: ServerlessGitInfo;
     let gitResolver: VariableResolver;
-    let newGitResolver: { resolve: ({ address: string }) => Promise<{ value: string }>; };
+    let newGitResolver: { resolve: (params: { address: string }) => Promise<{ value: string }>; };
 
     beforeEach(() => {
       plugin = new ServerlessGitInfo({} as Serverless);

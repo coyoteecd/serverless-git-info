@@ -6,7 +6,7 @@ import util from 'util';
 export default class ServerlessGitInfo implements Plugin {
   public hooks: Plugin.Hooks;
   public variableResolvers: Plugin.VariableResolvers;
-  public configurationVariablesSources: { git: { resolve: ({ address: string }) => Promise<{ value: string }>; }; };
+  public configurationVariablesSources: { git: { resolve: (params: { address: string }) => Promise<{ value: string }>; }; };
   public execAsync = util.promisify(childProcess.exec);
 
   constructor(_serverless: Serverless) {
